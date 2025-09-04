@@ -35,3 +35,52 @@ function showUserDetails(userId) {
         })
         .catch(error => console.error('Error fetching user details:', error));
 }
+
+const submitButton = document.getElementById('submit');
+const userId = document.getElementById('userId');
+const title = document.getElementById('title');
+
+submitButton.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const postData = {
+        id: 1,
+        userId: parseInt(userId.value),
+        title: title.value,
+    };
+
+
+    fetch('https://jsonplaceholder.typicode.com/posts/1', {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+        body: JSON.stringify(postData),
+    })
+        .then(response => response.json())
+        .then(json => console.log(json))
+        .catch(error => console.error('Error:', error));
+});
+
+
+
+const deleteButton = document.getElementById('delete');
+const postIdInput = document.getElementById('userId');
+
+deleteButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    const postId = postIdInput.value;
+    fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
+        method: 'DELETE',
+    })
+
+        .then(response => {
+            if (response.ok) {
+                console.log(`Post with ID ${postId} was deleted successfully.`);
+                alert(`Post with ID ${postId} was deleted successfully.`);
+            } else {
+                console.error('Failed to delete the post.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+});
