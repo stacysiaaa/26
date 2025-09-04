@@ -63,7 +63,6 @@ submitButton.addEventListener('click', (e) => {
 });
 
 
-
 const deleteButton = document.getElementById('delete');
 const postIdInput = document.getElementById('userId');
 
